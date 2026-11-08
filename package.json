@@ -1,0 +1,19 @@
+{
+  "name": "rodaya-2.0",
+  "version": "1.0.0",
+  "description": "Rodaya: sitio de renta de autos por día (proyecto de POO)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "keywords": [],
+  "author": "Brandon Alexander Chavez Flores",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.119.0",
+    "dotenv": "^18.0.9",
+    "express": "^5.3.0"
+  }
+}

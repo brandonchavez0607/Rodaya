@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rodaya - Renta de autos</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+  <header>
+    <h1 class="logo">Roda<span>ya</span></h1>
+    <nav>
+      <button class="nav-btn" data-target="inicio">Inicio</button>
+      <button class="nav-btn" data-target="catalogo">Catálogo</button>
+      <button class="nav-btn oculto" data-target="publicar">Publicar auto</button>
+      <button class="nav-btn oculto" data-target="reservas">Reservas</button>
+      <button class="nav-btn oculto" data-target="chat">Chat</button>
+      <button class="nav-btn oculto" data-target="panel">Panel</button>
+      <button class="nav-btn" data-target="auth">Cuenta</button>
+    </nav>
+    <div id="zona-usuario" class="zona-usuario oculto">
+      <span id="saludo"></span>
+      <button type="button" id="btn-salir" class="btn-salir">Cerrar sesión</button>
+    </div>
+  </header>
+
+  <div id="aviso" class="aviso oculto"></div>
+
+  <main>
+
+    <!-- Inicio -->
+    <section id="seccion-inicio" class="seccion activa">
+      <div class="hero">
+        <h2>Renta un auto por día, fácil y sin vueltas</h2>
+        <p>Elige el auto, escoge tus fechas y aparta con solo el 20% de anticipo.</p>
+        <button type="button" id="btn-inicio-catalogo" class="btn-primary">Ver catálogo</button>
+      </div>
+    </section>
+
+    <!-- Catálogo -->
+    <section id="seccion-catalogo" class="seccion">
+      <h2>Catálogo</h2>
+      <div id="grid-autos" class="grid">
+        <p class="vacio">Cargando autos...</p>
+      </div>
+    </section>
+
+    <!-- Publicar auto -->
+    <section id="seccion-publicar" class="seccion">
+      <h2>Publicar un auto</h2>
+      <form id="form-publicar" class="formulario">
+        <div class="input-group">
+          <label for="pub-marca">Marca</label>
+          <input type="text" id="pub-marca" placeholder="Ej. Ford" required>
+        </div>
+        <div class="input-group">
+          <label for="pub-modelo">Modelo y versión</label>
+          <input type="text" id="pub-modelo" placeholder="Ej. F-150 Lariat 4x4" required>
+        </div>
+        <div class="input-group">
+          <label for="pub-descripcion">Descripción</label>
+          <input type="text" id="pub-descripcion" placeholder="Ej. Motor V8, transmisión automática">
+        </div>
+        <div class="fila">
+          <div class="input-group">
+            <label for="pub-precio">Precio por día (MXN)</label>
+            <input type="number" id="pub-precio" min="1" placeholder="1200" required>
+          </div>
+          <div class="input-group">
+            <label for="pub-pasajeros">Pasajeros</label>
+            <input type="number" id="pub-pasajeros" min="1" max="15" value="5" required>
+          </div>
+        </div>
+        <div class="input-group">
+          <label for="pub-imagen">Foto del auto</label>
+          <input type="file" id="pub-imagen" accept="image/*">
+        </div>
+        <button type="submit" id="btn-publicar" class="btn-primary">Publicar</button>
+      </form>
+    </section>
+
+    <!-- Reservas -->
+    <section id="seccion-reservas" class="seccion">
+      <h2 id="titulo-reservas">Mis reservas</h2>
+      <div id="lista-reservas" class="lista"></div>
+    </section>
+
+    <!-- Chat -->
+    <section id="seccion-chat" class="seccion">
+      <h2>Chat</h2>
+      <div class="chat-layout">
+        <aside id="lista-chats" class="lista-chats"></aside>
+        <div class="chat-panel">
+          <div id="chat-cabecera" class="chat-cabecera">Elige una conversación</div>
+          <div id="chat-reserva" class="chat-reserva oculto"></div>
+          <div id="chat-box" class="chat-box"></div>
+          <form id="form-chat" class="form-chat oculto">
+            <input type="text" id="chat-input" placeholder="Escribe tu mensaje..." autocomplete="off" required>
+            <button type="submit" class="btn-primary">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel -->
+    <section id="seccion-panel" class="seccion">
+      <h2>Usuarios</h2>
+      <table class="tabla">
+        <thead>
+          <tr><th>Usuario</th><th>Rol</th></tr>
+        </thead>
+        <tbody id="tabla-usuarios"></tbody>
+      </table>
+    </section>
+
+    <!-- Cuenta -->
+    <section id="seccion-auth" class="seccion">
+      <div class="auth-card">
+        <div class="tabs">
+          <button type="button" class="tab actual" data-form="form-login">Ingresar</button>
+          <button type="button" class="tab" data-form="form-registro">Crear cuenta</button>
+        </div>
+
+        <form id="form-login" class="formulario">
+          <div class="input-group">
+            <label for="login-correo">Correo electrónico</label>
+            <input type="email" id="login-correo" placeholder="usuario@correo.com" required>
+          </div>
+          <div class="input-group">
+            <label for="login-password">Contraseña</label>
+            <input type="password" id="login-password" required>
+          </div>
+          <button type="submit" class="btn-primary">Ingresar</button>
+        </form>
+
+        <form id="form-registro" class="formulario oculto">
+          <div class="input-group">
+            <label for="reg-usuario">Nombre de usuario</label>
+            <input type="text" id="reg-usuario" placeholder="Ej. brandon" required>
+          </div>
+          <div class="input-group">
+            <label for="reg-correo">Correo electrónico</label>
+            <input type="email" id="reg-correo" placeholder="usuario@correo.com" required>
+          </div>
+          <div class="input-group">
+            <label for="reg-password">Contraseña (mínimo 6 caracteres)</label>
+            <input type="password" id="reg-password" minlength="6" required>
+          </div>
+          <div class="input-group">
+            <label for="reg-rol">Tipo de cuenta</label>
+            <select id="reg-rol">
+              <option value="cliente">Cliente: quiero rentar autos</option>
+              <option value="propietario">Propietario: quiero publicar mis autos</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-primary">Crear cuenta</button>
+        </form>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Ventana para reservar -->
+  <dialog id="dialogo-reserva">
+    <form id="form-reserva">
+      <h2 id="res-titulo"></h2>
+
+      <div class="fila">
+        <div class="input-group">
+          <label for="res-inicio">Recoges</label>
+          <input type="date" id="res-inicio" required>
+        </div>
+        <div class="input-group">
+          <label for="res-fin">Devuelves</label>
+          <input type="date" id="res-fin" required>
+        </div>
+      </div>
+
+      <p id="res-error" class="error oculto"></p>
+
+      <dl class="resumen">
+        <dt>Días</dt><dd id="res-dias">-</dd>
+        <dt>Renta</dt><dd id="res-renta">-</dd>
+        <dt>Seguro</dt><dd id="res-seguro">-</dd>
+        <dt class="total">Total</dt><dd id="res-total" class="total">-</dd>
+      </dl>
+
+      <fieldset class="opciones-pago">
+        <legend>¿Cuánto pagas ahora?</legend>
+        <label>
+          <input type="radio" name="tipo-pago" value="anticipo" checked>
+          Apartar con 20% de anticipo: <strong id="res-pago-anticipo">-</strong>
+        </label>
+        <label>
+          <input type="radio" name="tipo-pago" value="completo">
+          Pagar todo: <strong id="res-pago-completo">-</strong>
+        </label>
+      </fieldset>
+
+      <div class="acciones-dialogo">
+        <button type="button" id="res-cancelar" class="btn-secondary">Cancelar</button>
+        <button type="submit" id="res-confirmar" class="btn-primary">Confirmar reserva</button>
+      </div>
+    </form>
+  </dialog>
+
+  <script src="/src/client.js" type="module"></script>
+</body>
+</html>
