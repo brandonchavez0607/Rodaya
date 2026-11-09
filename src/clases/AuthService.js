@@ -3,7 +3,6 @@ import { Propietario } from './Propietario.js';
 import { Administrador } from './Administrador.js';
 import { Desarrollador } from './Desarrollador.js';
 
-// Según el rol guardado en la base de datos, se crea la clase que corresponde
 const CLASES_POR_ROL = {
   cliente: Cliente,
   propietario: Propietario,
@@ -28,7 +27,6 @@ export class AuthService {
     return new Clase(user.id, user.email, perfil.usuario);
   }
 
-  // Si ya había una sesión abierta, regresa el usuario; si no, null
   async sesionActual() {
     const { data } = await this.supabase.auth.getSession();
     if (!data.session) return null;
@@ -48,7 +46,6 @@ export class AuthService {
     return this.#armarUsuario(data.user);
   }
 
-  // Devuelve el usuario, o null si Supabase pide confirmar el correo primero
   async registrar(correo, password, usuario, rol) {
     const { data, error } = await this.supabase.auth.signUp({
       email: correo,
@@ -64,3 +61,4 @@ export class AuthService {
     await this.supabase.auth.signOut();
   }
 }
+// AuthService es una clase que maneja la autenticación de usuarios en la aplicación.

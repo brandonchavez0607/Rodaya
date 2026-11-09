@@ -1,8 +1,6 @@
 import { MensajeRepository } from './MensajeRepository.js';
 import { Interfaz } from './Interfaz.js';
 
-// Maneja la pantalla del chat. Cada conversación es entre un cliente y el
-// propietario de un auto, y se identifica con "idAuto:idCliente".
 export class ChatManager {
   #conversaciones = new Map();
   #actual = null;
@@ -35,7 +33,6 @@ export class ChatManager {
     });
   }
 
-  // Se llama cada vez que se entra a la sección Chat
   async abrir() {
     if (!this.#canal) {
       this.#canal = this.repo.escuchar(() => {
@@ -46,7 +43,6 @@ export class ChatManager {
     await this.refrescar();
   }
 
-  // Al darle "Preguntar" a un auto del catálogo
   abrirConAuto(auto) {
     const clave = `${auto.id}:${this.app.usuario.id}`;
     if (!this.#conversaciones.has(clave)) {
@@ -63,7 +59,6 @@ export class ChatManager {
     this.app.mostrarSeccion('chat');
   }
 
-  // Al cerrar sesión
   cerrar() {
     this.repo.dejarDeEscuchar(this.#canal);
     this.#canal = null;
@@ -93,7 +88,6 @@ export class ChatManager {
         nuevas.get(clave).mensajes.push(m);
       }
 
-      // Si el chat abierto todavía no tiene mensajes, lo conservamos en la lista
       if (previa && !nuevas.has(previa.clave)) nuevas.set(previa.clave, previa);
 
       this.#conversaciones = nuevas;
@@ -104,7 +98,6 @@ export class ChatManager {
     }
   }
 
-  // Nombre de la otra persona, si ya escribió algo
   otroNombre(conv) {
     const otro = conv.mensajes.find(m => m.autor_id !== this.app.usuario.id);
     return otro ? otro.autor_nombre : null;
@@ -175,7 +168,6 @@ export class ChatManager {
     }
   }
 
-  // Si el cliente ya reservó este auto, se muestran los datos arriba del chat
   async mostrarReserva(conv) {
     const caja = document.getElementById('chat-reserva');
     caja.classList.add('oculto');
@@ -187,7 +179,6 @@ export class ChatManager {
         <button type="button" class="btn-link" data-accion="ver-reservas">Ver en Reservas</button>`;
       caja.classList.remove('oculto');
     } catch (err) {
-      // si no se puede leer la reserva, el chat sigue funcionando
     }
   }
 

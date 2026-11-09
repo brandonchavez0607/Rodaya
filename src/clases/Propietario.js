@@ -10,10 +10,10 @@ export class Propietario extends Usuario {
 
   puedePublicar() { return true; }
 
-  // Con cuenta de propietario no se renta; para eso está la cuenta de cliente
+// Propietario no puede renta rsus autos, solo ver las reservas que le hacen.
   puedeReservar() { return false; }
-
-  // Solo puede eliminar sus propios autos
+  
+// Propietario solo puede eliminar autos que él publicó.
   puedeEliminarAuto(auto) {
     return auto.propietarioId === this.id;
   }

@@ -16,3 +16,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     Interfaz.aviso(`No se pudo iniciar Rodaya: ${err.message}`, 'error');
   }
 });
+// Este archivo es el punto de entrada del cliente. Se encarga de inicializar la aplicación y manejar errores de inicio.

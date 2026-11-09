@@ -1,4 +1,3 @@
-// Representa un auto del catálogo. Recibe la fila tal como viene de Supabase.
 export class Auto {
   #precioDia = 0;
 
@@ -10,7 +9,7 @@ export class Auto {
     this.descripcion = fila.descripcion || '';
     this.pasajeros = fila.pasajeros;
     this.imagenUrl = fila.imagen_url;
-    this.precioDia = fila.precio_dia; // pasa por el setter para validar
+    this.precioDia = fila.precio_dia; 
   }
 
   get precioDia() { return this.#precioDia; }
@@ -26,8 +25,9 @@ export class Auto {
     return `${this.marca} ${this.modelo}`;
   }
 
-  // Seguro fijo por reserva: $700 hasta 5 pasajeros, $1,100 si son más
+  // Seguro fijo $700 5 pasajeros y $1,100 si son más
   get seguro() {
     return this.pasajeros > 5 ? 1100 : 700;
   }
 }
+// La clase Auto representa un auto publicado por un propietario, con información como marca, modelo, precio por día y seguro.

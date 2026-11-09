@@ -8,7 +8,6 @@ import { Interfaz } from './Interfaz.js';
 
 const ROLES = ['cliente', 'propietario', 'administrador', 'desarrollador'];
 
-// Clase principal: junta las demás y controla lo que se ve en pantalla.
 export class RentaManager {
   #usuario = null;
   #autos = [];
@@ -30,8 +29,6 @@ export class RentaManager {
     this.actualizarMenu();
     this.mostrarSeccion('inicio');
   }
-
-  // ---------- Navegación ----------
 
   seccionesPermitidas() {
     if (!this.#usuario) return ['inicio', 'catalogo', 'auth'];
@@ -91,8 +88,6 @@ export class RentaManager {
 
     this.chat.conectarEventos();
   }
-
-  // ---------- Cuenta ----------
 
   cambiarTab(idFormulario) {
     document.querySelectorAll('.tab').forEach(tab => {
@@ -157,8 +152,6 @@ export class RentaManager {
     this.actualizarMenu();
     this.mostrarSeccion('inicio');
   }
-
-  // ---------- Catálogo ----------
 
   async cargarCatalogo() {
     const grid = document.getElementById('grid-autos');
@@ -247,8 +240,6 @@ export class RentaManager {
     }
   }
 
-  // ---------- Publicar ----------
-
   async publicarAuto(e) {
     e.preventDefault();
     const marca = document.getElementById('pub-marca').value.trim();
@@ -288,8 +279,6 @@ export class RentaManager {
       boton.disabled = false;
     }
   }
-
-  // ---------- Reservar ----------
 
   abrirReserva(auto) {
     this.#autoElegido = auto;
@@ -365,15 +354,13 @@ export class RentaManager {
     }
   }
 
-  // ---------- Reservas ----------
-
   async cargarReservas() {
     const lista = document.getElementById('lista-reservas');
     document.getElementById('titulo-reservas').textContent = this.#usuario.tituloReservas();
     lista.innerHTML = '<p class="vacio">Cargando reservas...</p>';
 
     try {
-      // Cada tipo de usuario trae sus propias reservas (polimorfismo)
+      // Cada usuario tiene sus propias reservas 
       const filas = await this.#usuario.obtenerReservas(this.reservas);
       if (filas.length === 0) {
         lista.innerHTML = '<p class="vacio">Todavía no hay reservas.</p>';

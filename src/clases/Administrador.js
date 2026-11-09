@@ -1,7 +1,5 @@
 import { Propietario } from './Propietario.js';
 
-// El administrador puede hacer todo lo del propietario, y además
-// ve todas las reservas, elimina cualquier auto y entra al panel de usuarios.
 export class Administrador extends Propietario {
   get rol() { return 'administrador'; }
 
@@ -11,7 +9,6 @@ export class Administrador extends Propietario {
 
   puedeEliminarAuto(auto) { return true; }
 
-  // El administrador sí puede reservar (sirve para probar el sistema)
   puedeReservar() { return true; }
 
   tituloReservas() { return 'Todas las reservas'; }
@@ -20,3 +17,4 @@ export class Administrador extends Propietario {
     return repoReservas.todas();
   }
 }
+// El administrador puede eliminar cualquier auto, ver todas las reservas y reservar autos.

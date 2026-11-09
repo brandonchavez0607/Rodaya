@@ -1,6 +1,5 @@
 import { BaseRepository } from './BaseRepository.js';
 
-// Trae también el auto y el nombre del cliente para mostrarlos en pantalla
 const CAMPOS = '*, autos(marca, modelo), perfiles(usuario)';
 
 export class ReservaRepository extends BaseRepository {
@@ -20,7 +19,6 @@ export class ReservaRepository extends BaseRepository {
     );
   }
 
-  // Reservas hechas sobre los autos de este propietario
   deMisAutos(propietarioId) {
     return this.ejecutar(
       this.supabase.from('reservas')
@@ -36,7 +34,6 @@ export class ReservaRepository extends BaseRepository {
     );
   }
 
-  // Última reserva de un cliente sobre un auto (para mostrarla en el chat)
   async ultimaDe(autoId, clienteId) {
     const filas = await this.ejecutar(
       this.supabase.from('reservas').select('*')
@@ -48,7 +45,6 @@ export class ReservaRepository extends BaseRepository {
     return filas[0] || null;
   }
 
-  // Revisa si ya hay una reserva que se cruza con esas fechas
   async hayTraslape(autoId, inicio, fin) {
     const { data, error } = await this.supabase.rpc('hay_traslape', {
       p_auto: autoId,

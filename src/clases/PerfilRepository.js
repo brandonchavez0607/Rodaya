@@ -11,7 +11,7 @@ export class PerfilRepository extends BaseRepository {
     );
   }
 
-  // Solo funciona si quien lo pide es desarrollador (lo controla Supabase)
+  // Cambiar rol de un usuario solo puede hacerlo un administrador
   cambiarRol(id, rol) {
     return this.ejecutar(
       this.supabase.from('perfiles').update({ rol }).eq('id', id).select()

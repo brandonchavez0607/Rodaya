@@ -5,7 +5,6 @@ export class MensajeRepository extends BaseRepository {
     super(supabase, 'mensajes');
   }
 
-  // Supabase solo devuelve los mensajes en los que participa el usuario
   delUsuario() {
     return this.ejecutar(
       this.supabase.from('mensajes')
@@ -18,7 +17,6 @@ export class MensajeRepository extends BaseRepository {
     return this.ejecutar(this.supabase.from('mensajes').insert(mensaje));
   }
 
-  // Una conversación es el chat entre un cliente y el propietario sobre un auto
   eliminarConversacion(autoId, clienteId) {
     return this.ejecutar(
       this.supabase.from('mensajes').delete()
@@ -27,7 +25,6 @@ export class MensajeRepository extends BaseRepository {
     );
   }
 
-  // Avisa cada vez que cambia la tabla de mensajes (tiempo real)
   escuchar(funcion) {
     return this.supabase
       .channel('chat-rodaya')

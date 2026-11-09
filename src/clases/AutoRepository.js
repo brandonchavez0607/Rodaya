@@ -6,7 +6,6 @@ export class AutoRepository extends BaseRepository {
     super(supabase, 'autos');
   }
 
-  // Devuelve objetos Auto, los más nuevos primero
   async listar() {
     const filas = await this.ejecutar(
       this.supabase.from('autos').select('*').order('creado', { ascending: false })
@@ -18,7 +17,6 @@ export class AutoRepository extends BaseRepository {
     return this.ejecutar(this.supabase.from('autos').insert(datos));
   }
 
-  // Sube la foto al bucket "autos" y devuelve su URL pública
   async subirImagen(archivo, usuarioId) {
     const extension = archivo.name.split('.').pop();
     const ruta = `${usuarioId}/${Date.now()}.${extension}`;

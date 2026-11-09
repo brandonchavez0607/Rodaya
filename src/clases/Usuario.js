@@ -1,5 +1,3 @@
-// Clase base: todos los tipos de cuenta heredan de aquí.
-// Las subclases cambian (sobrescriben) los métodos según lo que puede hacer cada rol.
 export class Usuario {
   #id;
   #correo;
@@ -15,10 +13,8 @@ export class Usuario {
   get correo() { return this.#correo; }
   get usuario() { return this.#usuario; }
 
-  // Cada subclase devuelve su propio rol
   get rol() { return 'cliente'; }
 
-  // Secciones del menú que puede ver este usuario
   secciones() {
     return ['inicio', 'catalogo', 'reservas', 'chat'];
   }
