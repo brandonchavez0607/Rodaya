@@ -1,5 +1,5 @@
 export class Usuario {
-  #id;
+  #id; 
   #correo;
   #usuario;
 
