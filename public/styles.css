@@ -1,4 +1,3 @@
-/* Colores de Rodaya: naranja, negro y blanco */
 :root {
   --naranja: #f97316;
   --naranja-oscuro: #ea580c;
@@ -25,9 +24,7 @@ body {
 .oculto {
   display: none !important;
 }
-
-/* ---------- Menú ---------- */
-
+//Menu
 header {
   background: var(--negro);
   color: #ffffff;
@@ -94,8 +91,6 @@ nav {
   border-color: var(--naranja);
 }
 
-/* ---------- Contenido ---------- */
-
 main {
   max-width: 1000px;
   margin: 0 auto;
@@ -137,7 +132,7 @@ h2 {
   padding: 1rem 0;
 }
 
-/* ---------- Botones ---------- */
+//Botones
 
 .btn-primary {
   background: var(--naranja);
@@ -185,8 +180,6 @@ h2 {
 .btn-link.peligro:hover {
   color: var(--rojo);
 }
-
-/* ---------- Catálogo ---------- */
 
 .grid {
   display: grid;
@@ -249,7 +242,7 @@ h2 {
   gap: 0.5rem;
 }
 
-/* ---------- Formularios ---------- */
+//Formularios
 
 .formulario {
   max-width: 480px;
@@ -292,7 +285,7 @@ select:focus {
   gap: 1rem;
 }
 
-/* ---------- Cuenta ---------- */
+//Cuenta
 
 .auth-card {
   max-width: 420px;
@@ -333,7 +326,7 @@ select:focus {
   width: 100%;
 }
 
-/* ---------- Reservas ---------- */
+//Reservas
 
 .lista {
   display: grid;
@@ -356,7 +349,7 @@ select:focus {
   margin-top: 0.3rem;
 }
 
-/* ---------- Ventana de reserva ---------- */
+// Ventana de reserva
 
 dialog {
   border: 1px solid var(--borde);
@@ -418,7 +411,7 @@ dialog::backdrop {
   margin-bottom: 0.8rem;
 }
 
-/* ---------- Chat ---------- */
+//Chat
 
 .chat-layout {
   display: grid;
@@ -531,8 +524,7 @@ dialog::backdrop {
   flex: 1;
 }
 
-/* ---------- Panel ---------- */
-
+//Panel
 .tabla {
   width: 100%;
   border-collapse: collapse;
@@ -549,8 +541,7 @@ dialog::backdrop {
   width: auto;
 }
 
-/* ---------- Avisos ---------- */
-
+//Avisos
 .aviso {
   position: fixed;
   bottom: 1rem;
@@ -568,8 +559,7 @@ dialog::backdrop {
   background: var(--rojo);
 }
 
-/* ---------- Celular ---------- */
-
+//Celular
 @media (max-width: 700px) {
   .chat-layout {
     grid-template-columns: 1fr;
