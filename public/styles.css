@@ -24,7 +24,7 @@ body {
 .oculto {
   display: none !important;
 }
-//Menu
+
 header {
   background: var(--negro);
   color: #ffffff;
@@ -131,8 +131,6 @@ h2 {
   color: var(--gris);
   padding: 1rem 0;
 }
-
-//Botones
 
 .btn-primary {
   background: var(--naranja);
@@ -242,8 +240,6 @@ h2 {
   gap: 0.5rem;
 }
 
-//Formularios
-
 .formulario {
   max-width: 480px;
 }
@@ -285,8 +281,6 @@ select:focus {
   gap: 1rem;
 }
 
-//Cuenta
-
 .auth-card {
   max-width: 420px;
   margin: 1rem auto;
@@ -326,8 +320,6 @@ select:focus {
   width: 100%;
 }
 
-//Reservas
-
 .lista {
   display: grid;
   gap: 1rem;
@@ -349,7 +341,6 @@ select:focus {
   margin-top: 0.3rem;
 }
 
-// Ventana de reserva
 
 dialog {
   border: 1px solid var(--borde);
@@ -410,8 +401,6 @@ dialog::backdrop {
   font-size: 0.9rem;
   margin-bottom: 0.8rem;
 }
-
-//Chat
 
 .chat-layout {
   display: grid;
@@ -524,7 +513,6 @@ dialog::backdrop {
   flex: 1;
 }
 
-//Panel
 .tabla {
   width: 100%;
   border-collapse: collapse;
@@ -541,7 +529,6 @@ dialog::backdrop {
   width: auto;
 }
 
-//Avisos
 .aviso {
   position: fixed;
   bottom: 1rem;
@@ -559,7 +546,6 @@ dialog::backdrop {
   background: var(--rojo);
 }
 
-//Celular
 @media (max-width: 700px) {
   .chat-layout {
     grid-template-columns: 1fr;
